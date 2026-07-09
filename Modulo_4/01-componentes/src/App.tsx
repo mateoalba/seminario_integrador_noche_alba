@@ -33,6 +33,10 @@ import ThemeToggle         from './components/ThemeToggle'
 import UserBadge           from './components/UserBadge'
 import LoginForm           from './components/LoginForm'
 import AppHeader           from './components/AppHeader'
+import PrimeSieve          from './components/PrimeSieve'
+import FilteredCatalog     from './components/FilteredCatalog'
+import OrderMetrics        from './components/OrderMetrics'
+import MultiTagFilter      from './components/MultiTagFilter'
 import { useAuth }         from './contexts/AuthContext'
 
 // ┌──────────────────────────────────────────────────────────────────────────┐
@@ -41,8 +45,9 @@ import { useAuth }         from './contexts/AuthContext'
 // │ 19-26: useEffect (Módulo 2)                                            │
 // │ 27-29: useReducer (Módulo 3)                                           │
 // │ 30-33: useContext (Módulo 3)                                           │
+// │ 34-37: useMemo (Módulo 3)                                              │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 32
+const PASO = 34
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -184,6 +189,11 @@ export default function App() {
     PASO === 31 ? <UserBadge /> :
     PASO === 32 ? <LoginForm /> :
     PASO === 33 ? <AppHeader /> :
+    // ── Módulo 3: useMemo ──
+    PASO === 34 ? <PrimeSieve /> :
+    PASO === 35 ? <FilteredCatalog /> :
+    PASO === 36 ? <OrderMetrics /> :
+    PASO === 37 ? <MultiTagFilter /> :
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
