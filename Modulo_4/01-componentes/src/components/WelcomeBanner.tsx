@@ -1,17 +1,8 @@
-function Bienvenida() {
-  return (
-    <section style={{ maxWidth: 600, margin: '40px auto', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: '#1a6b4a' }}>Hola desde React 19 + TypeScript</h1>
-      <p>Proyecto configurado con Vite 8.</p>
-      <p>Versión: 1.0.0</p>
-    </section>
-  )
-}
-
 export default function WelcomeBanner() {
   return (
-    <main>
-      <Bienvenida />
-    </main>
+    <div style={{ background: '#0070f3', color: '#fff', padding: '16px 24px', borderRadius: 8 }}>
+      <h1 style={{ margin: 0, fontSize: 22 }}>Bienvenido al curso de React</h1>
+      <p style={{ margin: '6px 0 0', opacity: 0.85 }}>Aprende React 19 con TypeScript</p>
+    </div>
   )
 }
