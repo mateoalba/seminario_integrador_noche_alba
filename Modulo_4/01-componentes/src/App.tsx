@@ -37,6 +37,10 @@ import PrimeSieve          from './components/PrimeSieve'
 import FilteredCatalog     from './components/FilteredCatalog'
 import OrderMetrics        from './components/OrderMetrics'
 import MultiTagFilter      from './components/MultiTagFilter'
+import MemoizedList        from './components/MemoizedList'
+import SearchWithFetch     from './components/SearchWithFetch'
+import FilterTable         from './components/FilterTable'
+import PaginatedFetch      from './components/PaginatedFetch'
 import { useAuth }         from './contexts/AuthContext'
 
 // ┌──────────────────────────────────────────────────────────────────────────┐
@@ -46,8 +50,9 @@ import { useAuth }         from './contexts/AuthContext'
 // │ 27-29: useReducer (Módulo 3)                                           │
 // │ 30-33: useContext (Módulo 3)                                           │
 // │ 34-37: useMemo (Módulo 3)                                              │
+// │ 38-41: useCallback (Módulo 3)                                          │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 34
+const PASO = 38
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -194,6 +199,11 @@ export default function App() {
     PASO === 35 ? <FilteredCatalog /> :
     PASO === 36 ? <OrderMetrics /> :
     PASO === 37 ? <MultiTagFilter /> :
+    // ── Módulo 3: useCallback ──
+    PASO === 38 ? <MemoizedList /> :
+    PASO === 39 ? <SearchWithFetch /> :
+    PASO === 40 ? <FilterTable /> :
+    PASO === 41 ? <PaginatedFetch /> :
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
