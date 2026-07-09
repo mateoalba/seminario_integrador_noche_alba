@@ -41,6 +41,13 @@ import MemoizedList        from './components/MemoizedList'
 import SearchWithFetch     from './components/SearchWithFetch'
 import FilterTable         from './components/FilterTable'
 import PaginatedFetch      from './components/PaginatedFetch'
+import ModalDemo           from './components/ModalDemo'
+import QuantitySelector    from './components/QuantitySelector'
+import ThemeSelector       from './components/ThemeSelector'
+import LiveSearch          from './components/LiveSearch'
+import PostList            from './components/PostList'
+import ResponsiveLayout    from './components/ResponsiveLayout'
+import CodeBlock           from './components/CodeBlock'
 import { useAuth }         from './contexts/AuthContext'
 
 // ┌──────────────────────────────────────────────────────────────────────────┐
@@ -51,8 +58,9 @@ import { useAuth }         from './contexts/AuthContext'
 // │ 30-33: useContext (Módulo 3)                                           │
 // │ 34-37: useMemo (Módulo 3)                                              │
 // │ 38-41: useCallback (Módulo 3)                                          │
+// │ 42-48: Custom Hooks (Módulo 4)                                        │
 // └──────────────────────────────────────────────────────────────────────────┘
-const PASO = 38
+const PASO = 44
 
 const fruits = [
   { name: 'Manzana', emoji: '🍎', calories: 52 },
@@ -72,6 +80,12 @@ const storeCatalog = [
   { id: 2, name: 'Monitor 27"',       price: 349.99 },
   { id: 3, name: 'Mouse inalámbrico', price: 29.99 },
 ]
+
+const EXAMPLE_CODE = `export function useToggle(initial = false) {
+  const [value, setValue] = useState(initial)
+  const toggle = useCallback(() => setValue(v => !v), [])
+  return { value, toggle }
+}`
 
 export default function App() {
   const auth        = useAuth()
@@ -204,6 +218,14 @@ export default function App() {
     PASO === 39 ? <SearchWithFetch /> :
     PASO === 40 ? <FilterTable /> :
     PASO === 41 ? <PaginatedFetch /> :
+    // ── Módulo 4: Custom Hooks ──
+    PASO === 42 ? <ModalDemo /> :
+    PASO === 43 ? <QuantitySelector /> :
+    PASO === 44 ? <ThemeSelector /> :
+    PASO === 45 ? <LiveSearch /> :
+    PASO === 46 ? <PostList /> :
+    PASO === 47 ? <ResponsiveLayout /> :
+    PASO === 48 ? <CodeBlock code={EXAMPLE_CODE} language="tsx" /> :
     <p style={{ color: '#e00' }}>Paso {PASO}: crea el componente primero</p>
 
   return (
