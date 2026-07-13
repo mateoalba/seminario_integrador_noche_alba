@@ -17,6 +17,40 @@ export class AxiosCategoryRepository implements CategoryRepository {
     }
   }
 
+  async createCategory(payload: {
+    name: string
+    slug: string
+    description?: string
+    is_active?: boolean
+  }): Promise<Category> {
+    try {
+      const { data } = await apiClient.post<Category>('/categories/', payload)
+      return data
+    } catch (err) {
+      throw parseApiError(err)
+    }
+  }
+
+  async updateCategory(
+    id: number,
+    payload: { name?: string; description?: string; is_active?: boolean },
+  ): Promise<Category> {
+    try {
+      const { data } = await apiClient.patch<Category>(`/categories/${id}/`, payload)
+      return data
+    } catch (err) {
+      throw parseApiError(err)
+    }
+  }
+
+  async deleteCategory(id: number): Promise<void> {
+    try {
+      await apiClient.delete(`/categories/${id}/`)
+    } catch (err) {
+      throw parseApiError(err)
+    }
+  }
+
   async getStats(): Promise<CategoryStats> {
     try {
       const { data } = await apiClient.get<CategoryStats>('/categories/stats/')
