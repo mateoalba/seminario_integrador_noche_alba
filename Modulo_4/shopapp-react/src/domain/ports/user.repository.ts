@@ -1,4 +1,5 @@
 import type { UserProfile } from '../entities/user-profile.entity'
+import type { UserStats } from '../entities/user-stats.entity'
 
 export interface UserRepository {
   getProfile(): Promise<UserProfile>
@@ -7,4 +8,5 @@ export interface UserRepository {
     last_name?: string
     email?: string
   }): Promise<UserProfile>
+  getStats(): Promise<UserStats>
 }
