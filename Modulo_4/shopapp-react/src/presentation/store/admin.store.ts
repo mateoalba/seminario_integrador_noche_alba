@@ -56,6 +56,7 @@ interface AdminActions {
   updateProduct(id: number, dto: UpdateProductDto): Promise<void>
   deleteProduct(id: number): Promise<void>
   restockProduct(id: number, quantity: number): Promise<number>
+  uploadProductImage(id: number, file: File): Promise<void>
 
   fetchAdminOrders(): Promise<void>
   setOrdersStatusFilter(status: OrderStatus | ''): void
@@ -183,6 +184,15 @@ export const useAdminStore = create<AdminState & AdminActions>((set, get) => ({
       })
     } catch (err) {
       throw err instanceof ApiException ? err : new Error('No se pudo eliminar el producto.')
+    }
+  },
+
+  async uploadProductImage(id, file) {
+    try {
+      const updated = await productUseCase.uploadImage(id, file)
+      set({ products: get().products.map((p) => (p.id === id ? updated : p)) })
+    } catch (err) {
+      throw err instanceof ApiException ? err : new Error('No se pudo subir la imagen.')
     }
   },
 

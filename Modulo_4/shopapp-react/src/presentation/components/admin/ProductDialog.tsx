@@ -7,6 +7,8 @@ import {
   DialogTitle,
 } from '@/presentation/components/ui/dialog'
 import { useAdminStore } from '@/presentation/store/admin.store'
+import { ImageUploader } from '@/presentation/components/ImageUploader'
+import { Separator } from '@/presentation/components/ui/separator'
 import { ApiException } from '@/domain/exceptions/api.exception'
 import type { Category } from '@/domain/entities/category.entity'
 import type { Product } from '@/domain/entities/product.entity'
@@ -23,10 +25,16 @@ export function ProductDialog({ open, onOpenChange, product, categories }: Produ
   const [isLoading, setIsLoading] = useState(false)
   const createProduct = useAdminStore((s) => s.createProduct)
   const updateProduct = useAdminStore((s) => s.updateProduct)
+  const uploadProductImage = useAdminStore((s) => s.uploadProductImage)
 
   const isEditing = Boolean(product)
   const title = isEditing ? 'Editar producto' : 'Nuevo producto'
   const activeCategories = categories.filter((c) => c.is_active)
+
+  async function handleImageUpload(file: File) {
+    if (!product) return
+    await uploadProductImage(product.id, file)
+  }
 
   async function handleSubmit(data: ProductFormValues) {
     setIsLoading(true)
@@ -73,6 +81,20 @@ export function ProductDialog({ open, onOpenChange, product, categories }: Produ
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
+
+        {isEditing && product && (
+          <>
+            <div className="space-y-2">
+              <h3 className="text-sm font-medium">Imagen del producto</h3>
+              <p className="text-xs text-muted-foreground">
+                La imagen se sube al instante; no es necesario guardar el formulario.
+              </p>
+              <ImageUploader currentImageUrl={product.image} onUpload={handleImageUpload} />
+            </div>
+            <Separator />
+          </>
+        )}
+
         <ProductForm
           key={product?.id ?? 'new'}
           defaultValues={defaultValues}

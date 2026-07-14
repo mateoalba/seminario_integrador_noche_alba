@@ -58,6 +58,18 @@ export class AxiosUserRepository implements UserRepository {
     }
   }
 
+  async uploadAvatar(file: File): Promise<UserProfile> {
+    const formData = new FormData()
+    formData.append('avatar', file)
+
+    try {
+      const { data } = await apiClient.patch<UserProfile>('/users/profile/', formData)
+      return data
+    } catch (err) {
+      throw parseApiError(err)
+    }
+  }
+
   async toggleUserActive(id: number): Promise<{ is_active: boolean }> {
     try {
       const { data } = await apiClient.post<{ message: string; is_active: boolean }>(
